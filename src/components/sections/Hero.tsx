@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { Swiper as SwiperClass } from "swiper/types";
+import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
@@ -37,6 +38,7 @@ export default function Hero() {
   const [swiperInstance, setSwiperInstance] = useState<SwiperClass | null>(
     null
   );
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     if (swiperInstance && prevRef.current && nextRef.current) {
@@ -56,8 +58,9 @@ export default function Hero() {
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop
         pagination={{ clickable: true }}
-        navigation={false} // <--- ВАЖНО: отключаем внутренние кнопки
-        onSwiper={(swiper) => setSwiperInstance(swiper)}
+        navigation={false}
+        onSwiper={setSwiperInstance}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         className="h-full w-full"
       >
         {slides.map((slide, i) => (
@@ -70,22 +73,52 @@ export default function Hero() {
                 className="object-cover"
                 priority={i === 0}
               />
+
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white">
-                <div className="text-center px-4">
-                  <h1 className="text-4xl md:text-6xl font-bold mb-4">
-                    {slide.title}
-                  </h1>
-                  <p className="text-lg md:text-2xl mb-6">{slide.subtitle}</p>
-                  <Button size="lg" className="text-lg cursor-pointer">
-                    Сделать заказ
-                  </Button>
-                </div>
+                <AnimatePresence mode="wait">
+                  {activeIndex === i && (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.6 }}
+                      className="text-center px-4"
+                    >
+                      <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-4xl md:text-6xl font-bold mb-4"
+                      >
+                        {slide.title}
+                      </motion.h1>
+                      <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="text-lg md:text-2xl mb-6"
+                      >
+                        {slide.subtitle}
+                      </motion.p>
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.6 }}
+                      >
+                        <Button size="lg" className="text-lg cursor-pointer">
+                          Сделать заказ
+                        </Button>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </SwiperSlide>
         ))}
 
-        {/* Кастомные кнопки навигации */}
+        {/* Кастомные стрелки */}
         <Button
           ref={prevRef}
           variant="ghost"
