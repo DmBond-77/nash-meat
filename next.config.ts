@@ -1,7 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async headers() {
+    return [
+      {
+        source: "/(.*)", // применимо ко всем маршрутам
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "frame-src https://widgets.2gis.com https://2gis.kz;",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
