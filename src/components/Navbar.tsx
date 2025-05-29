@@ -1,33 +1,33 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import clsx from "clsx";
-import Image from "next/image";
-import Link from "next/link";
-import SocialIcons from "@/components/shared/SocialIcons";
-import Container from "@/components/shared/Container";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from 'react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import clsx from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
+import SocialIcons from '@/components/shared/SocialIcons';
+import Container from '@/components/shared/Container';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("/");
+  const [activeSection, setActiveSection] = useState<string>('/');
 
   const links = [
-    { label: "Главная", href: "/" },
-    { label: "Почему мы", href: "#why" },
-    { label: "О компании", href: "#about" },
-    { label: "Контакты", href: "#contact" },
+    { label: 'Главная', href: '/' },
+    { label: 'Почему мы', href: '#why' },
+    { label: 'О компании', href: '#about' },
+    { label: 'Контакты', href: '#contact' },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 3;
-      let current = "/";
+      let current = '/';
 
       for (const link of links) {
-        if (link.href.startsWith("#")) {
+        if (link.href.startsWith('#')) {
           const section = document.querySelector(link.href);
           if (section && section instanceof HTMLElement) {
             const top = section.offsetTop;
@@ -37,17 +37,17 @@ export default function Navbar() {
               break;
             }
           }
-        } else if (link.href === "/" && window.scrollY < 100) {
-          current = "/";
+        } else if (link.href === '/' && window.scrollY < 100) {
+          current = '/';
         }
       }
 
       setActiveSection(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [links]);
 
   // Варианты анимации для логотипа, меню и соцсетей (без каталога и моб. меню)
@@ -56,7 +56,7 @@ export default function Navbar() {
     visible: (custom: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: custom * 0.1, duration: 0.5, ease: "easeOut" },
+      transition: { delay: custom * 0.1, duration: 0.5, ease: 'easeOut' },
     }),
   };
 
@@ -66,12 +66,12 @@ export default function Navbar() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.35, ease: "easeOut" },
+      transition: { duration: 0.35, ease: 'easeOut' },
     },
     exit: {
       opacity: 0,
       y: -50,
-      transition: { duration: 0.25, ease: "easeIn" },
+      transition: { duration: 0.25, ease: 'easeIn' },
     },
   };
 
@@ -110,8 +110,8 @@ export default function Navbar() {
             {links.map((link) => {
               const isActive =
                 activeSection === link.href ||
-                (link.href === "/" &&
-                  (activeSection === "/" || activeSection === ""));
+                (link.href === '/' &&
+                  (activeSection === '/' || activeSection === ''));
 
               return (
                 <Link
@@ -120,18 +120,18 @@ export default function Navbar() {
                   className="group relative inline-block transition-colors text-md"
                 >
                   <span
-                    className={clsx("relative", {
-                      "text-red-700": isActive,
-                      "text-gray-600 hover:text-red-800": !isActive,
+                    className={clsx('relative', {
+                      'text-red-700': isActive,
+                      'text-gray-600 hover:text-red-800': !isActive,
                     })}
                   >
                     {link.label}
                     <span
                       className={clsx(
-                        "absolute left-0 -bottom-1 h-[2px] bg-red-700 transition-all duration-300",
+                        'absolute left-0 -bottom-1 h-[2px] bg-red-700 transition-all duration-300',
                         {
-                          "w-0 group-hover:w-full": !isActive,
-                          "w-full": isActive,
+                          'w-0 group-hover:w-full': !isActive,
+                          'w-full': isActive,
                         }
                       )}
                     />
@@ -151,7 +151,7 @@ export default function Navbar() {
                 <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
               </button>
               <div className="absolute top-full left-0 bg-white border shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-20 min-w-[150px]">
-                {["Свинина", "Говядина", "Курица", "Конина"].map((item) => (
+                {['Свинина', 'Говядина', 'Курица'].map((item) => (
                   <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
@@ -213,8 +213,8 @@ export default function Navbar() {
               {links.map((link) => {
                 const isActive =
                   activeSection === link.href ||
-                  (link.href === "/" &&
-                    (activeSection === "/" || activeSection === ""));
+                  (link.href === '/' &&
+                    (activeSection === '/' || activeSection === ''));
 
                 return (
                   <a
@@ -222,10 +222,10 @@ export default function Navbar() {
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className={clsx(
-                      "group relative inline-block transition-colors",
+                      'group relative inline-block transition-colors',
                       {
-                        "text-red-700": isActive,
-                        "text-gray-600 hover:text-red-800": !isActive,
+                        'text-red-700': isActive,
+                        'text-gray-600 hover:text-red-800': !isActive,
                       }
                     )}
                   >
@@ -233,10 +233,10 @@ export default function Navbar() {
                       {link.label}
                       <span
                         className={clsx(
-                          "absolute left-0 -bottom-1 h-[2px] bg-red-700 transition-all duration-300",
+                          'absolute left-0 -bottom-1 h-[2px] bg-red-700 transition-all duration-300',
                           {
-                            "w-0 group-hover:w-full": !isActive,
-                            "w-full": isActive,
+                            'w-0 group-hover:w-full': !isActive,
+                            'w-full': isActive,
                           }
                         )}
                       />
@@ -256,8 +256,8 @@ export default function Navbar() {
                   Каталог
                   <ChevronDown
                     className={clsx(
-                      "w-4 h-4 transition-transform duration-300",
-                      isCatalogOpen ? "rotate-180" : "rotate-0"
+                      'w-4 h-4 transition-transform duration-300',
+                      isCatalogOpen ? 'rotate-180' : 'rotate-0'
                     )}
                   />
                 </button>
@@ -268,7 +268,7 @@ export default function Navbar() {
                     className="mt-2 w-full overflow-hidden"
                   >
                     <nav className="flex flex-col space-y-2">
-                      {["Свинина", "Говядина", "Курица", "Конина"].map(
+                      {['Свинина', 'Говядина', 'Курица', 'Конина'].map(
                         (item) => (
                           <a
                             key={item}

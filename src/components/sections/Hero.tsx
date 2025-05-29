@@ -1,34 +1,34 @@
-"use client";
+'use client';
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
-import { Swiper as SwiperClass } from "swiper/types";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRef, useEffect, useState } from 'react';
+import { Swiper as SwiperClass } from 'swiper/types';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
   {
-    src: "/images/hero1.webp",
-    title: "Премиальные стейки",
-    subtitle: "Отборное мясо высшего качества",
+    src: '/images/hero1.webp',
+    title: 'Премиальные стейки',
+    subtitle: 'Отборное мясо высшего качества',
   },
   {
-    src: "/images/hero2.webp",
-    title: "Фермерская свинина",
-    subtitle: "Разделка по всем стандартам",
+    src: '/images/hero2.webp',
+    title: 'Фермерская свинина',
+    subtitle: 'Разделка по всем стандартам',
   },
   {
-    src: "/images/hero3.webp",
-    title: "Мясо с любовью",
-    subtitle: "Лучшие повара выбирают нас",
+    src: '/images/hero3.webp',
+    title: 'Мясо с любовью',
+    subtitle: 'Лучшие повара выбирают нас',
   },
 ];
 
@@ -41,10 +41,13 @@ export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
-    if (swiperInstance && prevRef.current && nextRef.current) {
-      // @ts-ignore
+    if (
+      swiperInstance &&
+      prevRef.current &&
+      nextRef.current &&
+      typeof swiperInstance.params.navigation === 'object'
+    ) {
       swiperInstance.params.navigation.prevEl = prevRef.current;
-      // @ts-ignore
       swiperInstance.params.navigation.nextEl = nextRef.current;
       swiperInstance.navigation.init();
       swiperInstance.navigation.update();
@@ -106,9 +109,14 @@ export default function Hero() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.6 }}
                       >
-                        <Button size="lg" className="text-lg cursor-pointer">
-                          Сделать заказ
-                        </Button>
+                        <a href="#contact">
+                          <Button
+                            size="lg"
+                            className="text-lg cursor-pointer bg-red-500 hover:bg-red-900"
+                          >
+                            Сделать заказ
+                          </Button>
+                        </a>
                       </motion.div>
                     </motion.div>
                   )}
