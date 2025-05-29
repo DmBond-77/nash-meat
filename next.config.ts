@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: "frame-src https://widgets.2gis.com https://2gis.kz;",
+            value:
+              "frame-src https://www.google.com https://widgets.2gis.com https://2gis.kz https://maps.google.com ;",
           },
         ],
       },

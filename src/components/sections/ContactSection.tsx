@@ -5,20 +5,22 @@ import { motion } from "framer-motion";
 
 const stores = [
   {
-    title: "Магазин на Жамбыла, 45",
-    address: "г. Караганда, ул. Жамбыла, 45",
+    title: "Магазин на Кузембаева, 77/1",
+    address: "г. Караганда, 17-й м-н Улица Кузембаева, 77/1,",
     phone: "+7 (701) 123-45-67",
     hours: "Пн-Вс: 09:00 - 21:00",
+    // embed ссылка из Google Maps для iframe
     mapSrc:
-      "https://widgets.2gis.com/widget.html?type=firm&regionId=17&firmId=70000001046992828",
+      'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2570.741013310163!2d73.19761199999999!3d49.88489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sru!2skz!4v1748448886117!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade',
   },
   {
-    title: "Магазин на Степной, 3",
-    address: "г. Караганда, мкр-н Степной 3, 9",
+    title: "Магазин на Дружбы, 124/1",
+    address: "п. Сортировка, Улица Дружбы, 124/1",
     phone: "+7 (702) 765-43-21",
     hours: "Пн-Вс: 10:00 - 20:00",
+    // embed ссылка для второго адреса
     mapSrc:
-      "https://widgets.2gis.com/widget.html?type=firm&regionId=17&firmId=70000001100170377",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3020.6299874535336!2d73.21343831523098!3d49.97336607939233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4243521ef1f49091%3A0x53b220be942ccb6e!2z0J3QvtCy0L7QstCwIDExMSwg0JrQsNC70YzQutC-0LrQsNGG0LAsINCQ0L7QsdC7Liwg0JrQvtC70L7Qv9C10YDQtdGC0LXRgdGC0LgwMDAwMA!5e0!3m2!1sru!2skz!4v1685288498000!5m2!1sru!2skz",
   },
 ];
 
@@ -64,7 +66,7 @@ export default function ContactSection() {
                 <p className="flex items-start gap-2 text-gray-700">
                   <Phone className="w-5 h-5 mt-1 text-red-500" />
                   <a
-                    href={`tel:${store.phone}`}
+                    href={`tel:${store.phone.replace(/\s+/g, "")}`}
                     className="hover:underline"
                     itemProp="telephone"
                   >
@@ -86,7 +88,7 @@ export default function ContactSection() {
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
                   title={`Карта ${store.title}`}
-                ></iframe>
+                />
               </div>
             </motion.article>
           ))}
