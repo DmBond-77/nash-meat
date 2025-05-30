@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
@@ -14,12 +14,15 @@ export default function Navbar() {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("/");
 
-  const links = [
-    { label: "Главная", href: "/" },
-    { label: "Почему мы", href: "#why" },
-    { label: "О компании", href: "#about" },
-    { label: "Контакты", href: "#contact" },
-  ];
+  const links = useMemo(
+    () => [
+      { label: "Главная", href: "/" },
+      { label: "Почему мы", href: "#why" },
+      { label: "О компании", href: "#about" },
+      { label: "Контакты", href: "#contact" },
+    ],
+    []
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +53,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [links]);
 
-  // Варианты анимации для логотипа, меню и соцсетей (без каталога и моб. меню)
   const headerVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: (custom: number) => ({
@@ -60,7 +62,6 @@ export default function Navbar() {
     }),
   };
 
-  // Мобильное меню (без изменений, без анимации для каталога)
   const mobileMenuVariants = {
     hidden: { opacity: 0, y: -50 },
     visible: {
@@ -117,6 +118,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
+                  aria-current={isActive ? "page" : undefined}
                   className="group relative inline-block transition-colors text-md"
                 >
                   <span
@@ -146,11 +148,15 @@ export default function Navbar() {
                 className="text-gray-600 hover:text-red-800 font-semibold text-md px-0 flex items-center gap-2 cursor-pointer"
                 aria-haspopup="true"
                 aria-expanded="false"
+                aria-controls="catalog-dropdown"
               >
                 <span>Каталог</span>
                 <ChevronDown className="w-4 h-4 transition-transform group-hover:rotate-180" />
               </button>
-              <div className="absolute top-full left-0 bg-white border shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-20 min-w-[150px]">
+              <div
+                id="catalog-dropdown"
+                className="absolute top-full left-0 bg-white border shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-20 min-w-[150px]"
+              >
                 {["Свинина", "Говядина", "Курица"].map((item) => (
                   <a
                     key={item}
@@ -186,7 +192,11 @@ export default function Navbar() {
               if (isOpen) setIsCatalogOpen(false);
             }}
             className="md:hidden text-red-700 cursor-pointer"
-            aria-label="Открыть мобильное меню"
+            aria-label={
+              isOpen ? "Закрыть мобильное меню" : "Открыть мобильное меню"
+            }
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
@@ -198,6 +208,7 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             key="mobile-menu"
+            id="mobile-menu"
             initial="hidden"
             animate="visible"
             exit="exit"
@@ -217,7 +228,7 @@ export default function Navbar() {
                     (activeSection === "/" || activeSection === ""));
 
                 return (
-                  <a
+                  <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
@@ -228,6 +239,7 @@ export default function Navbar() {
                         "text-gray-600 hover:text-red-800": !isActive,
                       }
                     )}
+                    aria-current={isActive ? "page" : undefined}
                   >
                     <span className="relative">
                       {link.label}
@@ -241,11 +253,11 @@ export default function Navbar() {
                         )}
                       />
                     </span>
-                  </a>
+                  </Link>
                 );
               })}
 
-              {/* Каталог Mobile без анимации */}
+              {/* Каталог Mobile */}
               <div className="w-full text-center">
                 <button
                   onClick={() => setIsCatalogOpen(!isCatalogOpen)}
@@ -269,7 +281,7 @@ export default function Navbar() {
                   >
                     <nav className="flex flex-col space-y-2">
                       {["Свинина", "Говядина", "Курица"].map((item) => (
-                        <a
+                        <Link
                           key={item}
                           href={`#${item.toLowerCase()}`}
                           onClick={() => {
@@ -279,20 +291,20 @@ export default function Navbar() {
                           className="block px-4 py-2 text-gray-600 hover:bg-red-700 hover:text-white transition-colors rounded-md"
                         >
                           {item}
-                        </a>
+                        </Link>
                       ))}
                     </nav>
                   </div>
                 )}
               </div>
 
-              <a
+              <Link
                 href="#contact"
                 onClick={() => setIsOpen(false)}
                 className="mt-4 bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800 transition"
               >
                 Сделать заказ
-              </a>
+              </Link>
 
               <SocialIcons className="mt-6" />
             </nav>
