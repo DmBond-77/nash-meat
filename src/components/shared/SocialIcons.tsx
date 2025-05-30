@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Mail, Phone, Send } from "lucide-react";
+import { Instagram, Phone } from "lucide-react";
 interface SocialIconsProps {
   className?: string;
 }
