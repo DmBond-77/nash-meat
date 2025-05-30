@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import clsx from "clsx";
 import Image from "next/image";
@@ -9,27 +9,25 @@ import SocialIcons from "@/components/shared/SocialIcons";
 import Container from "@/components/shared/Container";
 import { motion, AnimatePresence } from "framer-motion";
 
+// Вынесено вне компонента
+const NAV_LINKS = [
+  { label: "Главная", href: "/" },
+  { label: "Почему мы", href: "#why" },
+  { label: "О компании", href: "#about" },
+  { label: "Контакты", href: "#contact" },
+];
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>("/");
-
-  const links = useMemo(
-    () => [
-      { label: "Главная", href: "/" },
-      { label: "Почему мы", href: "#why" },
-      { label: "О компании", href: "#about" },
-      { label: "Контакты", href: "#contact" },
-    ],
-    []
-  );
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 3;
       let current = "/";
 
-      for (const link of links) {
+      for (const link of NAV_LINKS) {
         if (link.href.startsWith("#")) {
           const section = document.querySelector(link.href);
           if (section && section instanceof HTMLElement) {
@@ -51,7 +49,7 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [links]);
+  }, []);
 
   const headerVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -80,7 +78,6 @@ export default function Navbar() {
     <>
       <header className="fixed top-0 left-0 z-50 w-full shadow-md bg-white border-b border-red-200">
         <Container className="flex items-center justify-between gap-6 py-3">
-          {/* Логотип с анимацией, delay = 0 */}
           <motion.div
             custom={0}
             initial="hidden"
@@ -99,7 +96,6 @@ export default function Navbar() {
             </Link>
           </motion.div>
 
-          {/* Основное меню (Desktop) с анимацией, delay = 1 */}
           <motion.nav
             custom={1}
             initial="hidden"
@@ -108,7 +104,7 @@ export default function Navbar() {
             className="hidden lg:flex items-center space-x-6 text-base font-semibold"
             aria-label="Главная навигация"
           >
-            {links.map((link) => {
+            {NAV_LINKS.map((link) => {
               const isActive =
                 activeSection === link.href ||
                 (link.href === "/" &&
@@ -142,7 +138,6 @@ export default function Navbar() {
               );
             })}
 
-            {/* Каталог Desktop (без анимации) */}
             <div className="relative group">
               <button
                 className="text-gray-600 hover:text-red-800 font-semibold text-md px-0 flex items-center gap-2 cursor-pointer"
@@ -170,7 +165,6 @@ export default function Navbar() {
             </div>
           </motion.nav>
 
-          {/* Соцсети с анимацией, delay = 2 */}
           <motion.div
             custom={2}
             initial="hidden"
@@ -181,7 +175,6 @@ export default function Navbar() {
             <SocialIcons />
           </motion.div>
 
-          {/* Кнопка гамбургер с анимацией, delay = 3 */}
           <motion.button
             custom={3}
             initial="hidden"
@@ -203,7 +196,6 @@ export default function Navbar() {
         </Container>
       </header>
 
-      {/* Мобильное меню с анимацией */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -221,7 +213,7 @@ export default function Navbar() {
               className="flex flex-col items-center space-y-6 text-xl font-semibold"
               aria-label="Мобильная навигация"
             >
-              {links.map((link) => {
+              {NAV_LINKS.map((link) => {
                 const isActive =
                   activeSection === link.href ||
                   (link.href === "/" &&
@@ -257,7 +249,6 @@ export default function Navbar() {
                 );
               })}
 
-              {/* Каталог Mobile */}
               <div className="w-full text-center">
                 <button
                   onClick={() => setIsCatalogOpen(!isCatalogOpen)}

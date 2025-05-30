@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -40,8 +40,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  themeColor: "#ffffff",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   openGraph: {
     title: "Nash Meat | Натуральное мясо с доставкой",
     description:
@@ -52,7 +50,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og-image.jpg", // убедись, что он существует
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Nash Meat - Натуральное мясо в Караганде",
@@ -70,17 +68,25 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png", // опционально
+    apple: "/apple-touch-icon.png",
   },
+};
+
+// ✅ отдельный экспорт viewport, как требует Next.js 15.3+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
