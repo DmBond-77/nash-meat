@@ -1,41 +1,38 @@
 "use client";
 
-import Image from "next/image";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import Image from "next/image";
+import clsx from "clsx";
 
-const beefProducts = [
+const lambProducts = [
   {
     id: 1,
-    title: "Крестец",
-    kazakh: "Жамбас басы",
-    description: "Жамбас басы",
-    price: "1500тг/кг",
-    image: "/images/beef-card1.webp",
+    title: "Хребет",
+    description: "Омыртқа",
+    price: "3700 ₸/кг",
+    image: "/images/lamb-card1.webp",
   },
   {
     id: 2,
-    title: "Медальоны",
-    kazakh: "Медальондар",
-    description: "Медальондар",
-    price: "2850тг/кг",
-    image: "/images/beef-card1.webp",
+    title: "Лопатка",
+    description: "Жауырын",
+    price: "3300 ₸/кг",
+    image: "/images/lamb-card1.webp",
   },
   {
     id: 3,
-    title: "Култышка",
-    kazakh: "Кәрі жілік",
-    description: "Кәрі жілік",
-    price: "1700тг/кг",
-    image: "/images/beef-card1.webp",
+    title: "Задняя часть",
+    description: "Сирақ",
+    price: "3700 ₸/кг",
+    image: "/images/lamb-card1.webp",
   },
   {
     id: 4,
-    title: "Печень",
-    kazakh: "Бауыр",
-    description: "Бауыр",
-    price: "1000тг/кг",
-    image: "/images/beef-card1.webp",
+    title: "Курдюк",
+    description: "Құйрық",
+    price: "3700 ₸/кг",
+    image: "/images/lamb-card1.webp",
   },
 ];
 
@@ -48,14 +45,15 @@ const cardVariants = {
   }),
 };
 
-export default function BeefSection() {
-  const visibleProducts = beefProducts.slice(0, 3);
+export default function LambSection() {
+  const [showAll, setShowAll] = useState(false);
+  const visibleProducts = showAll ? lambProducts : lambProducts.slice(0, 3);
 
   return (
-    <section id="говядина" className="py-12 bg-gray-50">
+    <section id="баранина" className="py-12 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-red-700 mb-8">
-          Ассортимент говядина — Сиыр еті ассортименті
+          Ассортимент баранина – Қой еті ассортименті
         </h2>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -94,13 +92,18 @@ export default function BeefSection() {
           </AnimatePresence>
         </div>
 
-        {beefProducts.length > 3 && (
-          <Link
-            href="/beef"
-            className="mt-8 inline-block px-6 py-2 rounded-lg font-semibold bg-red-700 text-white hover:bg-red-800 transition-colors duration-300"
+        {lambProducts.length > 3 && (
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className={clsx(
+              "mt-8 px-6 py-2 rounded-lg font-semibold transition-colors duration-300 cursor-pointer",
+              showAll
+                ? "bg-gray-300 text-gray-800 hover:bg-gray-400"
+                : "bg-red-700 text-white hover:bg-red-800"
+            )}
           >
-            Показать ещё
-          </Link>
+            {showAll ? "Скрыть" : "Показать ещё"}
+          </button>
         )}
       </div>
     </section>

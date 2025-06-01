@@ -1,34 +1,34 @@
-'use client';
+"use client";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/autoplay';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
-import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef, useEffect, useState } from 'react';
-import { Swiper as SwiperClass } from 'swiper/types';
-import { motion, AnimatePresence } from 'framer-motion';
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { Swiper as SwiperClass } from "swiper/types";
+import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
-    src: '/images/hero1.webp',
-    title: 'Премиальные стейки',
-    subtitle: 'Отборное мясо высшего качества',
+    src: "/images/hero1.webp",
+    title: "Только сочное. Только лучшее",
+    subtitle: "Отборное мясо высшего качества",
   },
   {
-    src: '/images/hero2.webp',
-    title: 'Фермерская свинина',
-    subtitle: 'Разделка по всем стандартам',
+    src: "/images/hero2.webp",
+    title: "Фермерская свинина",
+    subtitle: "Разделка по всем стандартам",
   },
   {
-    src: '/images/hero3.webp',
-    title: 'Мясо с любовью',
-    subtitle: 'Лучшие повара выбирают нас',
+    src: "/images/hero3.webp",
+    title: "Мясо с любовью",
+    subtitle: "Лучшие повара выбирают нас",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function Hero() {
       swiperInstance &&
       prevRef.current &&
       nextRef.current &&
-      typeof swiperInstance.params.navigation === 'object'
+      typeof swiperInstance.params.navigation === "object"
     ) {
       swiperInstance.params.navigation.prevEl = prevRef.current;
       swiperInstance.params.navigation.nextEl = nextRef.current;

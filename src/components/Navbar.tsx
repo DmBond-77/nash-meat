@@ -158,15 +158,17 @@ export default function Navbar() {
                 id="catalog-dropdown"
                 className="absolute top-full left-0 bg-white border shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-20 min-w-[150px]"
               >
-                {["Свинина", "Говядина", "Курица"].map((item) => (
-                  <Link
-                    key={item}
-                    href={`/#${item.toLowerCase()}`}
-                    className="block px-4 py-2 hover:bg-red-700 hover:text-white transition-colors"
-                  >
-                    {item}
-                  </Link>
-                ))}
+                {["Свинина", "Говядина", "Курица", "Баранина", "Фарш"].map(
+                  (item) => (
+                    <Link
+                      key={item}
+                      href={`/#${item.toLowerCase()}`}
+                      className="block px-4 py-2 hover:bg-red-700 hover:text-white transition-colors"
+                    >
+                      {item}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
           </motion.nav>
@@ -214,7 +216,7 @@ export default function Navbar() {
             animate="visible"
             exit="exit"
             variants={mobileMenuVariants}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-white text-red-700 md:hidden px-6"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-white text-red-700 lg:hidden px-6"
             role="dialog"
             aria-label="Mobile menu"
           >
@@ -279,7 +281,13 @@ export default function Navbar() {
                     className="mt-2 w-full overflow-hidden"
                   >
                     <nav className="flex flex-col space-y-2">
-                      {["Свинина", "Говядина", "Курица"].map((item) => (
+                      {[
+                        "Свинина",
+                        "Говядина",
+                        "Курица",
+                        "Баранина",
+                        "Фарш",
+                      ].map((item) => (
                         <Link
                           key={item}
                           href={`/#${item.toLowerCase()}`}

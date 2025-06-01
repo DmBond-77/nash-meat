@@ -5,62 +5,48 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import clsx from "clsx";
 
-const porkProducts = [
+const minceProducts = [
   {
     id: 1,
-    title: "Суп набор",
-    description: "Көжеге арналған жиынтық",
-    price: "600 ₸/кг",
-    image: "/images/pork-card1.webp",
+    title: "Говяжий постный",
+    description: "Майсыз тартылған сиыр еті",
+    price: "3900 ₸/кг",
+    image: "/images/mince-card1.webp",
   },
   {
     id: 2,
-    title: "Щеки",
-    description: "Жақ",
-    price: "800 ₸/кг",
-    image: "/images/pork-card1.webp",
+    title: "Рубленный говяжий",
+    description: "Туралған, сиыр еті",
+    price: "4100 ₸/кг",
+    image: "/images/mince-card1.webp",
   },
   {
     id: 3,
-    title: "Сало",
-    description: "Май",
-    price: "150 ₸/кг",
-    image: "/images/pork-card1.webp",
+    title: "Говядина+баранина",
+    description: "Сиыр еті + қой еті",
+    price: "3500 ₸/кг",
+    image: "/images/mince-card1.webp",
   },
   {
     id: 4,
-    title: "Ножка свиная",
-    description: "Шошқаның сан еті",
-    price: "800 ₸/кг",
-    image: "/images/pork-card1.webp",
+    title: "Говяжий",
+    description: "Сиыр еті",
+    price: "3400 ₸/кг",
+    image: "/images/mince-card1.webp",
   },
   {
     id: 5,
-    title: "Копыто",
-    description: "Тұяқ",
-    price: "350 ₸/кг",
-    image: "/images/pork-card1.webp",
+    title: "Смешанный",
+    description: "Аралас",
+    price: "2850 ₸/кг",
+    image: "/images/mince-card1.webp",
   },
   {
     id: 6,
-    title: "Мякоть",
-    description: "Жұмсақ ет",
-    price: "2500 ₸/кг",
-    image: "/images/pork-card1.webp",
-  },
-  {
-    id: 7,
-    title: "Филе",
-    description: "Сүбе",
-    price: "2700 ₸/кг",
-    image: "/images/pork-card1.webp",
-  },
-  {
-    id: 8,
-    title: "Антрекот",
-    description: "Антрекот",
-    price: "2250 ₸/кг",
-    image: "/images/pork-card1.webp",
+    title: "Куриный",
+    description: "Тауық еті",
+    price: "2100 ₸/кг",
+    image: "/images/mince-card1.webp",
   },
 ];
 
@@ -73,15 +59,15 @@ const cardVariants = {
   }),
 };
 
-export default function PorkSection() {
+export default function MinceSection() {
   const [showAll, setShowAll] = useState(false);
-  const visibleProducts = showAll ? porkProducts : porkProducts.slice(0, 3);
+  const visibleProducts = showAll ? minceProducts : minceProducts.slice(0, 3);
 
   return (
-    <section id="свинина" className="py-12 bg-gray-50">
+    <section id="фарш" className="py-12 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-red-700 mb-8">
-          Ассортимент свинина- Шошқа еті ассортименті
+          Ассортимент Фарш: Тартылған ет ассортименті
         </h2>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -120,7 +106,7 @@ export default function PorkSection() {
           </AnimatePresence>
         </div>
 
-        {porkProducts.length > 3 && (
+        {minceProducts.length > 3 && (
           <button
             onClick={() => setShowAll(!showAll)}
             className={clsx(
