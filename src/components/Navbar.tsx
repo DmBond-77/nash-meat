@@ -9,7 +9,7 @@ import SocialIcons from "@/components/shared/SocialIcons";
 import Container from "@/components/shared/Container";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Вынесено вне компонента
+// Navigation links (adjusted for full page + anchors)
 const NAV_LINKS = [
   { label: "Главная", href: "/" },
   { label: "Почему мы", href: "/#why" },
@@ -18,19 +18,21 @@ const NAV_LINKS = [
 ];
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Mobile menu open/close
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false); // Catalog submenu open/close
   const [activeSection, setActiveSection] = useState<string>("/");
 
+  // Highlight active nav link based on scroll position (only on home page)
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 3;
       let current = "/";
 
       for (const link of NAV_LINKS) {
-        if (link.href.startsWith("#")) {
-          const section = document.querySelector(link.href);
-          if (section && section instanceof HTMLElement) {
+        if (link.href.startsWith("/#")) {
+          const id = link.href.split("#")[1];
+          const section = document.getElementById(id);
+          if (section) {
             const top = section.offsetTop;
             const bottom = top + section.offsetHeight;
             if (scrollPos >= top && scrollPos < bottom) {
@@ -38,19 +40,21 @@ export default function Navbar() {
               break;
             }
           }
-        } else if (link.href === "/" && window.scrollY < 100) {
-          current = "/";
         }
       }
 
       setActiveSection(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    if (typeof window !== "undefined" && window.location.pathname === "/") {
+      window.addEventListener("scroll", handleScroll);
+      handleScroll();
+    }
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Animation presets
   const headerVariants = {
     hidden: { opacity: 0, y: -20 },
     visible: (custom: number) => ({
@@ -76,8 +80,10 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Sticky header container */}
       <header className="fixed top-0 left-0 z-50 w-full shadow-md bg-white border-b border-red-200">
         <Container className="flex items-center justify-between gap-6 py-3">
+          {/* Logo */}
           <motion.div
             custom={0}
             initial="hidden"
@@ -96,19 +102,18 @@ export default function Navbar() {
             </Link>
           </motion.div>
 
+          {/* Desktop navigation (shown at lg and above) */}
           <motion.nav
             custom={1}
             initial="hidden"
             animate="visible"
             variants={headerVariants}
             className="hidden lg:flex items-center space-x-6 text-base font-semibold"
-            aria-label="Главная навигация"
+            aria-label="Main navigation"
           >
+            {/* Main nav links */}
             {NAV_LINKS.map((link) => {
-              const isActive =
-                activeSection === link.href ||
-                (link.href === "/" &&
-                  (activeSection === "/" || activeSection === ""));
+              const isActive = activeSection === link.href;
 
               return (
                 <Link
@@ -138,6 +143,7 @@ export default function Navbar() {
               );
             })}
 
+            {/* Catalog dropdown (desktop) */}
             <div className="relative group">
               <button
                 className="text-gray-600 hover:text-red-800 font-semibold text-md px-0 flex items-center gap-2 cursor-pointer"
@@ -153,18 +159,19 @@ export default function Navbar() {
                 className="absolute top-full left-0 bg-white border shadow-md opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-20 min-w-[150px]"
               >
                 {["Свинина", "Говядина", "Курица"].map((item) => (
-                  <a
+                  <Link
                     key={item}
                     href={`/#${item.toLowerCase()}`}
                     className="block px-4 py-2 hover:bg-red-700 hover:text-white transition-colors"
                   >
                     {item}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
           </motion.nav>
 
+          {/* Social icons (desktop) */}
           <motion.div
             custom={2}
             initial="hidden"
@@ -175,6 +182,7 @@ export default function Navbar() {
             <SocialIcons />
           </motion.div>
 
+          {/* Burger button (mobile only) */}
           <motion.button
             custom={3}
             initial="hidden"
@@ -184,7 +192,7 @@ export default function Navbar() {
               setIsOpen(!isOpen);
               if (isOpen) setIsCatalogOpen(false);
             }}
-            className="md:hidden text-red-700 cursor-pointer"
+            className="lg:hidden text-red-700 cursor-pointer"
             aria-label={
               isOpen ? "Закрыть мобильное меню" : "Открыть мобильное меню"
             }
@@ -196,6 +204,7 @@ export default function Navbar() {
         </Container>
       </header>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -207,17 +216,15 @@ export default function Navbar() {
             variants={mobileMenuVariants}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-white text-red-700 md:hidden px-6"
             role="dialog"
-            aria-label="Мобильное меню"
+            aria-label="Mobile menu"
           >
+            {/* Mobile nav links */}
             <nav
               className="flex flex-col items-center space-y-6 text-xl font-semibold"
-              aria-label="Мобильная навигация"
+              aria-label="Mobile navigation"
             >
               {NAV_LINKS.map((link) => {
-                const isActive =
-                  activeSection === link.href ||
-                  (link.href === "/" &&
-                    (activeSection === "/" || activeSection === ""));
+                const isActive = activeSection === link.href;
 
                 return (
                   <Link
@@ -249,6 +256,7 @@ export default function Navbar() {
                 );
               })}
 
+              {/* Catalog (mobile dropdown) */}
               <div className="w-full text-center">
                 <button
                   onClick={() => setIsCatalogOpen(!isCatalogOpen)}
@@ -289,14 +297,16 @@ export default function Navbar() {
                 )}
               </div>
 
+              {/* Order button (mobile) */}
               <Link
-                href="#contact"
+                href="/#contact"
                 onClick={() => setIsOpen(false)}
                 className="mt-4 bg-red-700 text-white px-4 py-2 rounded-lg hover:bg-red-800 transition"
               >
                 Сделать заказ
               </Link>
 
+              {/* Social icons (mobile) */}
               <SocialIcons className="mt-6" />
             </nav>
           </motion.div>
