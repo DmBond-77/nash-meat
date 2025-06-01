@@ -1,45 +1,41 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import clsx from 'clsx';
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const beefProducts = [
   {
     id: 1,
-    title: 'Говяжья вырезка',
-    description: 'Мягкая и сочная часть говядины премиум-класса.',
-    price: '2400 ₸/кг',
-    image: '/images/beef-card1.webp',
+    title: "Крестец",
+    kazakh: "Жамбас басы",
+    description: "Жамбас басы",
+    price: "1500тг/кг",
+    image: "/images/beef-card1.webp",
   },
   {
     id: 2,
-    title: 'Говяжий стейк',
-    description: 'Идеально подходит для жарки и гриля.',
-    price: '2200 ₸/кг',
-    image: '/images/beef-card1.webp',
+    title: "Медальоны",
+    kazakh: "Медальондар",
+    description: "Медальондар",
+    price: "2850тг/кг",
+    image: "/images/beef-card1.webp",
   },
   {
     id: 3,
-    title: 'Говяжьи рёбра',
-    description: 'Ароматные ребрышки для тушения и барбекю.',
-    price: '1900 ₸/кг',
-    image: '/images/beef-card1.webp',
+    title: "Култышка",
+    kazakh: "Кәрі жілік",
+    description: "Кәрі жілік",
+    price: "1700тг/кг",
+    image: "/images/beef-card1.webp",
   },
   {
     id: 4,
-    title: 'Фарш из говядины',
-    description: 'Свежий фарш, идеально подходит для котлет и соусов.',
-    price: '1700 ₸/кг',
-    image: '/images/beef-card1.webp',
-  },
-  {
-    id: 5,
-    title: 'Говяжья грудинка',
-    description: 'Сочная часть для медленного томления.',
-    price: '1800 ₸/кг',
-    image: '/images/beef-card1.webp',
+    title: "Печень",
+    kazakh: "Бауыр",
+    description: "Бауыр",
+    price: "1000тг/кг",
+    image: "/images/beef-card1.webp",
   },
 ];
 
@@ -53,8 +49,7 @@ const cardVariants = {
 };
 
 export default function BeefSection() {
-  const [showAll, setShowAll] = useState(false);
-  const visibleProducts = showAll ? beefProducts : beefProducts.slice(0, 3);
+  const visibleProducts = beefProducts.slice(0, 3);
 
   return (
     <section id="говядина" className="py-12 bg-gray-50">
@@ -98,17 +93,12 @@ export default function BeefSection() {
         </div>
 
         {beefProducts.length > 3 && (
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className={clsx(
-              'mt-8 px-6 py-2 rounded-lg font-semibold transition-colors duration-300 cursor-pointer',
-              showAll
-                ? 'bg-gray-300 text-gray-800 hover:bg-gray-400'
-                : 'bg-red-700 text-white hover:bg-red-800'
-            )}
+          <Link
+            href="/beef"
+            className="mt-8 inline-block px-6 py-2 rounded-lg font-semibold bg-red-700 text-white hover:bg-red-800 transition-colors duration-300"
           >
-            {showAll ? 'Скрыть' : 'Показать ещё'}
-          </button>
+            Показать ещё
+          </Link>
         )}
       </div>
     </section>

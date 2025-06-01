@@ -35,7 +35,25 @@ export default function TestimonialsSection() {
       text: "Очень рад, что открыл для себя вашу компанию. Надёжность, вкус и сервис — всё супер!",
       rating: 5,
     },
+    {
+      name: "Абылайхан А.",
+      text: "Мальчишки молодцы. Всегда свежее мясо и фарш очень хороший. Все чисто, аккуратно. Большой выбор мяса и полуфабрикатов.",
+      rating: 5,
+    },
+    {
+      name: "К.Н.",
+      text: "Очень нравится этот магазин. Всегда чисто, персонал приветливый, мясо свежее и качественное. Часто беру здесь говядину и фарш — никогда не подводили.",
+      rating: 4,
+    },
+    {
+      name: "Марат Б.",
+      text: "Очень доволен качеством продукции. Персонал всегда вежливый, доставка своевременная. Отличный магазин для всей семьи!",
+      rating: 5,
+    },
   ];
+
+  // Фильтруем только 4 и 5 звёзд
+  const filteredTestimonials = testimonials.filter((t) => t.rating >= 4);
 
   return (
     <motion.section
@@ -60,7 +78,7 @@ export default function TestimonialsSection() {
         </motion.h2>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((t, i) => (
+          {filteredTestimonials.map((t, i) => (
             <motion.blockquote
               key={i}
               className="bg-gray-50 p-6 rounded-xl shadow-2xl border border-red-100"

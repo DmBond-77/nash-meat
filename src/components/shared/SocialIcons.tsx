@@ -12,7 +12,7 @@ export default function SocialIcons({ className }: SocialIconsProps) {
     >
       <a className="flex gap-2" href="tel:+7-771-670-67-07">
         <Phone className="w-6 h-6 text-red-600 hover:text-red-600 transition-transform duration-300 hover:scale-120 animate-bounce" />
-        <span className="text-red-800 font-semibold">+7-771-670-67-07</span>
+        <span className="text-red-800 font-semibold">+7 (771) 670-670-7</span>
       </a>
       <a
         href="https://www.instagram.com/nash_meat?igsh=MWtraTh1cDg1cWFpeA%3D%3D&utm_source=qr"

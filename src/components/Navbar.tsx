@@ -12,9 +12,9 @@ import { motion, AnimatePresence } from "framer-motion";
 // Вынесено вне компонента
 const NAV_LINKS = [
   { label: "Главная", href: "/" },
-  { label: "Почему мы", href: "#why" },
-  { label: "О компании", href: "#about" },
-  { label: "Контакты", href: "#contact" },
+  { label: "Почему мы", href: "/#why" },
+  { label: "О компании", href: "/#about" },
+  { label: "Контакты", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -155,7 +155,7 @@ export default function Navbar() {
                 {["Свинина", "Говядина", "Курица"].map((item) => (
                   <a
                     key={item}
-                    href={`#${item.toLowerCase()}`}
+                    href={`/#${item.toLowerCase()}`}
                     className="block px-4 py-2 hover:bg-red-700 hover:text-white transition-colors"
                   >
                     {item}
@@ -274,7 +274,7 @@ export default function Navbar() {
                       {["Свинина", "Говядина", "Курица"].map((item) => (
                         <Link
                           key={item}
-                          href={`#${item.toLowerCase()}`}
+                          href={`/#${item.toLowerCase()}`}
                           onClick={() => {
                             setIsOpen(false);
                             setIsCatalogOpen(false);
