@@ -5,46 +5,52 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import clsx from "clsx";
 
-const minceProducts = [
+export const minceProducts = [
   {
     id: 1,
-    title: "Говяжий постный",
-    description: "Майсыз тартылған сиыр еті",
+    title: "Говяжий постный – Майсыз тартылған сиыр еті",
+    description: "Постное мясо для диетических блюд.",
+    descriptionKz: "Диеталық тағамдарға арналған майсыз ет.",
     price: "3900 ₸/кг",
     image: "/images/mince-card1.webp",
   },
   {
     id: 2,
-    title: "Рубленный говяжий",
-    description: "Туралған, сиыр еті",
+    title: "Рубленный говяжий – Туралған сиыр еті",
+    description: "Мелко нарубленное мясо для котлет и тефтелей.",
+    descriptionKz: "Котлет пен тефтельге арналған ет.",
     price: "4100 ₸/кг",
     image: "/images/mince-card1.webp",
   },
   {
     id: 3,
-    title: "Говядина+баранина",
-    description: "Сиыр еті + қой еті",
+    title: "Говядина+баранина – Сиыр еті + қой еті",
+    description: "Смешанный фарш для разнообразных блюд.",
+    descriptionKz: "Әртүрлі тағамдарға арналған аралас фарш.",
     price: "3500 ₸/кг",
     image: "/images/mince-card1.webp",
   },
   {
     id: 4,
-    title: "Говяжий",
-    description: "Сиыр еті",
+    title: "Говяжий – Сиыр еті",
+    description: "Классический говяжий фарш для повседневной готовки.",
+    descriptionKz: "Күнделікті тағамға арналған сиыр еті фаршы.",
     price: "3400 ₸/кг",
     image: "/images/mince-card1.webp",
   },
   {
     id: 5,
-    title: "Смешанный",
-    description: "Аралас",
+    title: "Смешанный – Аралас",
+    description: "Фарш из разных видов мяса для универсального использования.",
+    descriptionKz: "Көптеген тағамдарға арналған аралас ет фаршы.",
     price: "2850 ₸/кг",
     image: "/images/mince-card1.webp",
   },
   {
     id: 6,
-    title: "Куриный",
-    description: "Тауық еті",
+    title: "Куриный – Тауық еті",
+    description: "Легкий куриный фарш для диетических блюд.",
+    descriptionKz: "Диеталық тағамдарға арналған жеңіл тауық еті.",
     price: "2100 ₸/кг",
     image: "/images/mince-card1.webp",
   },
@@ -94,6 +100,9 @@ export default function MinceSection() {
                   <h3 className="text-xl font-semibold text-gray-800">
                     {product.title}
                   </h3>
+                  <p className="text-sm text-gray-600 my-2">
+                    {product.descriptionKz}
+                  </p>
                   <p className="text-sm text-gray-600 my-2">
                     {product.description}
                   </p>

@@ -7,33 +7,33 @@ import Link from "next/link";
 const beefProducts = [
   {
     id: 1,
-    title: "Крестец",
-    kazakh: "Жамбас басы",
-    description: "Жамбас басы",
+    title: "Крестец – Жамбас басы",
+    description: "Отлично подходит для наваристых бульонов и супов.",
+    descriptionKz: "Қайнатпа сорпа мен көже үшін таптырмас таңдау.",
     price: "1500тг/кг",
     image: "/images/beef-card1.webp",
   },
   {
     id: 2,
-    title: "Медальоны",
-    kazakh: "Медальондар",
-    description: "Медальондар",
+    title: "Медальоны – Медальондар",
+    description: "Нежные кусочки для жарки и стейков.",
+    descriptionKz: "Қуыру мен стейкке арналған жұмсақ ет бөліктері.",
     price: "2850тг/кг",
     image: "/images/beef-card1.webp",
   },
   {
     id: 3,
-    title: "Култышка",
-    kazakh: "Кәрі жілік",
-    description: "Кәрі жілік",
+    title: "Култышка – Кәрі жілік",
+    description: "Идеально для тушения с овощами.",
+    descriptionKz: "Көкөністермен бұқтырып пісіруге өте ыңғайлы.",
     price: "1700тг/кг",
     image: "/images/beef-card1.webp",
   },
   {
     id: 4,
-    title: "Печень",
-    kazakh: "Бауыр",
-    description: "Бауыр",
+    title: "Печень – Бауыр",
+    description: "Полезный субпродукт, богатый железом.",
+    descriptionKz: "Темірге бай, пайдалы ет өнімі.",
     price: "1000тг/кг",
     image: "/images/beef-card1.webp",
   },
@@ -82,6 +82,9 @@ export default function BeefSection() {
                   <h3 className="text-xl font-semibold text-gray-800">
                     {product.title}
                   </h3>
+                  <p className="text-sm text-gray-600 my-2">
+                    {product.descriptionKz}
+                  </p>
                   <p className="text-sm text-gray-600 my-2">
                     {product.description}
                   </p>

@@ -1,45 +1,50 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
-import clsx from 'clsx';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import clsx from "clsx";
 
 const products = [
   {
     id: 1,
-    title: 'Куриные бедра',
-    description: 'Свежее мясо курицы высшего качества.',
-    price: '950 ₸/кг',
-    image: '/images/chicken-card1.webp',
+    title: "Тауық саны – Куриные бедра",
+    description: "Свежее мясо курицы высшего качества.",
+    descriptionKz: "Сапалы тауық саны еті.",
+    price: "950 ₸/кг",
+    image: "/images/chicken-card1.webp",
   },
   {
     id: 2,
-    title: 'Куриные крылья',
-    description: 'Отборные крылья для гриля и жарки.',
-    price: '890 ₸/кг',
-    image: '/images/chicken-card1.webp',
+    title: "Тауық қанаттары – Куриные крылья",
+    description: "Отборные крылья для гриля и жарки.",
+    descriptionKz: "Қақтау мен қуыруға арналған тауық қанаттары.",
+    price: "890 ₸/кг",
+    image: "/images/chicken-card1.webp",
   },
   {
     id: 3,
-    title: 'Куриная грудка',
-    description: 'Нежное диетическое мясо.',
-    price: '1100 ₸/кг',
-    image: '/images/chicken-card1.webp',
+    title: "Тауық төсі – Куриная грудка",
+    description: "Нежное диетическое мясо.",
+    descriptionKz: "Жұмсақ әрі диеталық ет.",
+    price: "1100 ₸/кг",
+    image: "/images/chicken-card1.webp",
   },
   {
     id: 4,
-    title: 'Куриные голени',
-    description: 'Идеальны для запекания в духовке.',
-    price: '900 ₸/кг',
-    image: '/images/chicken-card1.webp',
+    title: "Тауық сирағы – Куриные голени",
+    description: "Идеальны для запекания в духовке.",
+    descriptionKz: "Пеште қуыруға өте қолайлы.",
+    price: "900 ₸/кг",
+    image: "/images/chicken-card1.webp",
   },
   {
     id: 5,
-    title: 'Куриное филе',
-    description: 'Чистое филе без костей.',
-    price: '1150 ₸/кг',
-    image: '/images/chicken-card1.webp',
+    title: "Филе (сүйексіз) – Куриное филе",
+    description: "Чистое филе без костей.",
+    descriptionKz: "Сүйексіз таза филе.",
+    price: "1150 ₸/кг",
+    image: "/images/chicken-card1.webp",
   },
 ];
 
@@ -93,6 +98,9 @@ export default function ChickenSection() {
                     {product.title}
                   </h3>
                   <p className="text-sm text-gray-600 my-2">
+                    {product.descriptionKz}
+                  </p>
+                  <p className="text-sm text-gray-600 my-2">
                     {product.description}
                   </p>
                   <p className="text-lg font-bold text-red-700">
@@ -108,13 +116,13 @@ export default function ChickenSection() {
           <button
             onClick={() => setShowAll(!showAll)}
             className={clsx(
-              'mt-8 px-6 py-2 rounded-lg font-semibold transition-colors duration-300 cursor-pointer',
+              "mt-8 px-6 py-2 rounded-lg font-semibold transition-colors duration-300 cursor-pointer",
               showAll
-                ? 'bg-gray-300 text-gray-800 hover:bg-gray-400'
-                : 'bg-red-700 text-white hover:bg-red-800'
+                ? "bg-gray-300 text-gray-800 hover:bg-gray-400"
+                : "bg-red-700 text-white hover:bg-red-800"
             )}
           >
-            {showAll ? 'Скрыть' : 'Показать ещё'}
+            {showAll ? "Скрыть" : "Показать ещё"}
           </button>
         )}
       </div>

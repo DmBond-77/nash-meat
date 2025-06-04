@@ -5,60 +5,68 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import clsx from "clsx";
 
-const porkProducts = [
+export const porkProducts = [
   {
     id: 1,
-    title: "Суп набор",
-    description: "Көжеге арналған жиынтық",
+    title: "Суп набор – Көжеге арналған жиынтық",
+    description: "Набор костей и мяса, идеально подходит для варки бульонов.",
+    descriptionKz: "Сорпа қайнатуға арналған сүйек пен ет жиынтығы.",
     price: "600 ₸/кг",
     image: "/images/pork-card1.webp",
   },
   {
     id: 2,
-    title: "Щеки",
-    description: "Жақ",
+    title: "Щеки – Жақ",
+    description: "Мясистые щеки, отличающиеся нежной текстурой.",
+    descriptionKz: "Жұмсақ құрылымды етті жақ бөліктері.",
     price: "800 ₸/кг",
     image: "/images/pork-card1.webp",
   },
   {
     id: 3,
-    title: "Сало",
-    description: "Май",
+    title: "Сало – Май",
+    description: "Классическое сало с прослойкой, подходит для засолки.",
+    descriptionKz: "Тұздауға арналған дәстүрлі май.",
     price: "150 ₸/кг",
     image: "/images/pork-card1.webp",
   },
   {
     id: 4,
-    title: "Ножка свиная",
-    description: "Шошқаның сан еті",
+    title: "Ножка свиная – Шошқаның сан еті",
+    description: "Свиные ножки для запекания и холодца.",
+    descriptionKz: "Қуыруға және сірне жасауға арналған сан еті.",
     price: "800 ₸/кг",
     image: "/images/pork-card1.webp",
   },
   {
     id: 5,
-    title: "Копыто",
-    description: "Тұяқ",
+    title: "Копыто – Тұяқ",
+    description: "Используется для приготовления наваристого холодца.",
+    descriptionKz: "Құнарлы сірне қайнатуға қолайлы тұяқ.",
     price: "350 ₸/кг",
     image: "/images/pork-card1.webp",
   },
   {
     id: 6,
-    title: "Мякоть",
-    description: "Жұмсақ ет",
+    title: "Мякоть – Жұмсақ ет",
+    description: "Сочное мясо без костей для жарки и тушения.",
+    descriptionKz: "Қуыру мен бұқтыруға арналған сүйексіз шырынды ет.",
     price: "2500 ₸/кг",
     image: "/images/pork-card1.webp",
   },
   {
     id: 7,
-    title: "Филе",
-    description: "Сүбе",
+    title: "Филе – Сүбе",
+    description: "Нежное филе, идеальное для диетических блюд.",
+    descriptionKz: "Диеталық тағамдарға арналған жұмсақ сүбе еті.",
     price: "2700 ₸/кг",
     image: "/images/pork-card1.webp",
   },
   {
     id: 8,
-    title: "Антрекот",
-    description: "Антрекот",
+    title: "Антрекот – Антрекот",
+    description: "Мясо с мраморной текстурой для стейков и гриля.",
+    descriptionKz: "Стейк пен грильге арналған мәрмәр құрылымды ет.",
     price: "2250 ₸/кг",
     image: "/images/pork-card1.webp",
   },
@@ -108,6 +116,9 @@ export default function PorkSection() {
                   <h3 className="text-xl font-semibold text-gray-800">
                     {product.title}
                   </h3>
+                  <p className="text-sm text-gray-600 my-2">
+                    {product.descriptionKz}
+                  </p>
                   <p className="text-sm text-gray-600 my-2">
                     {product.description}
                   </p>

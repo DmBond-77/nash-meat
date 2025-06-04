@@ -37,6 +37,9 @@ export default function BeefProductsList() {
             <h2 className="text-xl font-semibold text-gray-800">
               {product.title}
             </h2>
+            <p className="text-sm text-gray-600 my-2">
+              {product.descriptionKz}
+            </p>
             <p className="text-sm text-gray-600 my-2">{product.description}</p>
             <p className="text-lg font-bold text-red-700">{product.price}</p>
           </div>

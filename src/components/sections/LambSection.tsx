@@ -5,33 +5,53 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import clsx from "clsx";
 
-const lambProducts = [
+export const lambProducts = [
   {
     id: 1,
-    title: "Хребет",
-    description: "Омыртқа",
+    title: "Хребет – Омыртқа",
+    description: "Нежное мясо спинной части, идеально для запекания.",
+    descriptionKz: "Пеште қуыруға арналған жіңішке ет.",
     price: "3700 ₸/кг",
     image: "/images/lamb-card1.webp",
   },
   {
     id: 2,
-    title: "Лопатка",
-    description: "Жауырын",
+    title: "Лопатка – Жауырын",
+    description: "Мясистая часть для жарки и тушения.",
+    descriptionKz: "Қуыру мен бұқтыруға арналған етті бөлік.",
     price: "3300 ₸/кг",
     image: "/images/lamb-card1.webp",
   },
   {
     id: 3,
-    title: "Задняя часть",
-    description: "Сирақ",
+    title: "Задняя часть – Сирақ",
+    description: "Сочная задняя часть, подходит для плова и запеканок.",
+    descriptionKz: "Палау мен бәлішке арналған шырынды ет.",
     price: "3700 ₸/кг",
     image: "/images/lamb-card1.webp",
   },
   {
     id: 4,
-    title: "Курдюк",
-    description: "Құйрық",
+    title: "Курдюк – Құйрық",
+    description: "Жирная часть с насыщенным вкусом, для особых блюд.",
+    descriptionKz: "Тәтті тағамдарға арналған майлы бөлік.",
     price: "3700 ₸/кг",
+    image: "/images/lamb-card1.webp",
+  },
+  {
+    id: 5,
+    title: "Ребро – Қабырға",
+    description: "Мясо с косточкой для гриля и барбекю.",
+    descriptionKz: "Гриль мен барбекюге арналған ет.",
+    price: "3500 ₸/кг",
+    image: "/images/lamb-card1.webp",
+  },
+  {
+    id: 6,
+    title: "Шея – Мойын",
+    description: "Нежное мясо шеи для супов и тушения.",
+    descriptionKz: "Сорпа мен бұқтыруға арналған жұмсақ ет.",
+    price: "3500 ₸/кг",
     image: "/images/lamb-card1.webp",
   },
 ];
@@ -80,6 +100,9 @@ export default function LambSection() {
                   <h3 className="text-xl font-semibold text-gray-800">
                     {product.title}
                   </h3>
+                  <p className="text-sm text-gray-600 my-2">
+                    {product.descriptionKz}
+                  </p>
                   <p className="text-sm text-gray-600 my-2">
                     {product.description}
                   </p>
